@@ -1,0 +1,41 @@
+Asignatura:
+    type: entity
+    table: asignatura
+    id:
+        id:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        nombre:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        numeroCredito:
+            type: integer
+            nullable: false
+            unsigned: false
+            column: numero_credito
+        intensidadHoraria:
+            type: integer
+            nullable: false
+            unsigned: false
+            column: intensidad_horaria
+        modalidad:
+            type: string
+            nullable: false
+            length: 1
+            fixed: true
+        uniajc:
+            type: smallint
+            nullable: false
+            unsigned: false
+        estado:
+            type: smallint
+            nullable: false
+            unsigned: false
+    lifecycleCallbacks: {  }

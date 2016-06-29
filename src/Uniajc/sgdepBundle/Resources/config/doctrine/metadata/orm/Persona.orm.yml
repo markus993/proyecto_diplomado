@@ -1,0 +1,55 @@
+Persona:
+    type: entity
+    table: persona
+    id:
+        id:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+        identificacion:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+    fields:
+        codigo:
+            type: bigint
+            nullable: false
+            unsigned: false
+        nombres:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        apellidos:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        direccion:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+        telefono:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        celular:
+            type: string
+            nullable: false
+            length: null
+            fixed: false
+        email:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        genero:
+            type: string
+            nullable: false
+            length: 1
+            fixed: true
+    lifecycleCallbacks: {  }

@@ -1,0 +1,6 @@
+uniajcsgdep_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: UniajcsgdepBundle:Default:index }
+uniajcsgdep_consulta:
+    path:     /consulta/{tabla}/{campo}/{id}
+    defaults: { _controller: UniajcsgdepBundle:Consulta:show }

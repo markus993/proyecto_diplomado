@@ -1,0 +1,27 @@
+Facultad:
+    type: entity
+    table: facultad
+    id:
+        id:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        idInstitucion:
+            type: bigint
+            nullable: false
+            unsigned: false
+            column: id_institucion
+        nombre:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        estado:
+            type: smallint
+            nullable: false
+            unsigned: false
+    lifecycleCallbacks: {  }

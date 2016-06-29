@@ -1,0 +1,67 @@
+Programa:
+    type: entity
+    table: programa
+    indexes:
+        IDX_2F0140DA5DFB84A:
+            columns:
+                - id_facultad
+    id:
+        id:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        codigo:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        codigoSnies:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            column: codigo_snies
+        nombre:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        numeroCreditos:
+            type: integer
+            nullable: false
+            unsigned: false
+            column: numero_creditos
+        numeroAsignaturas:
+            type: integer
+            nullable: false
+            unsigned: false
+            column: numero_asignaturas
+        modalidad:
+            type: string
+            nullable: false
+            length: 1
+            fixed: true
+        jornada:
+            type: string
+            nullable: false
+            length: 1
+            fixed: true
+        estado:
+            type: smallint
+            nullable: false
+            unsigned: false
+    manyToOne:
+        idFacultad:
+            targetEntity: Facultad
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_facultad:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,34 @@
+Docente:
+    type: entity
+    table: docente
+    indexes:
+        IDX_FD9FCFA48F781FEBE37D9644:
+            columns:
+                - id_persona
+                - identificacion_persona
+    id:
+        id:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        estado:
+            type: smallint
+            nullable: false
+            unsigned: false
+    manyToOne:
+        idPersona:
+            targetEntity: Persona
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_persona:
+                    referencedColumnName: id
+                identificacion_persona:
+                    referencedColumnName: identificacion
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

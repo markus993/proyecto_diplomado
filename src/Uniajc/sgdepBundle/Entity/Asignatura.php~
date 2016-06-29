@@ -1,0 +1,68 @@
+<?php
+
+namespace Uniajc\sgdepBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Asignatura
+ *
+ * @ORM\Table(name="asignatura")
+ * @ORM\Entity
+ */
+class Asignatura
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="asignatura_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=255, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numero_credito", type="integer", nullable=false)
+     */
+    private $numeroCredito;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="intensidad_horaria", type="integer", nullable=false)
+     */
+    private $intensidadHoraria;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="modalidad", type="string", length=1, nullable=false)
+     */
+    private $modalidad;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="uniajc", type="smallint", nullable=false)
+     */
+    private $uniajc;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estado", type="smallint", nullable=false)
+     */
+    private $estado;
+
+
+}
