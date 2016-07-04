@@ -15,7 +15,7 @@ class ConsultaController extends Controller
         ->findOneBy(array($campo=> $id));
  
 		if (!$persona) {
-			throw $this->createNotFoundException('No Persona found for id '.$id);
+			return $this->render('UniajcsgdepBundle:Default:consulta.html.twig', array('tabla' => $tabla,'campo' => $campo,'id' => 'No encontrado'));
 		}
 		$codigo = $persona->getCodigo();
         return $this->render('UniajcsgdepBundle:Default:consulta.html.twig', array('tabla' => $tabla,'campo' => $campo,'id' => $codigo));

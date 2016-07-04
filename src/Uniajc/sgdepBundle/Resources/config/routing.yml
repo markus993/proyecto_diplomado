@@ -4,3 +4,6 @@ uniajcsgdep_homepage:
 uniajcsgdep_consulta:
     path:     /consulta/{tabla}/{campo}/{id}
     defaults: { _controller: UniajcsgdepBundle:Consulta:show }
+uniajcsgdep_rol:
+    path:     /rol/{id}
+    defaults: { _controller: UniajcsgdepBundle:Rol:show }
