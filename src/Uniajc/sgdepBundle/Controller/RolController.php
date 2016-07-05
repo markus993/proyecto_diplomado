@@ -39,7 +39,10 @@ class RolController extends Controller
 				$response['docente'] = 'true';
 			if( $results[0]['director']==1 )
 				$response['director'] = 'true';
-			return $this->render('UniajcsgdepBundle:Default:rol.html.twig', array('response' =>json_encode($response)));
+			if(isset($response))
+				return $this->render('UniajcsgdepBundle:Default:rol.html.twig', array('response' =>json_encode($response)));
+			else
+				return $this->render('UniajcsgdepBundle:Default:rol.html.twig', array('response' => 'false'));
 		}
     }
 }

@@ -32,7 +32,7 @@ function iniciarSesion() {
 			mostrarCargando();
 		
 			//Aqui va el api call para verificar el usuario y contraseña
-			$.get("http://192.168.0.30:8585/proyecto_diplomado/web/app_dev.php/rol/"+loginUsuario.val(), function (datos) {
+			$.get("/proyecto_diplomado/web/app_dev.php/rol/"+loginUsuario.val(), function (datos) {
 
 				/*if(datos!=false){
 					$.each(datos.usuarios, function (id, dato) {

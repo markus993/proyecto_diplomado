@@ -46,6 +46,7 @@
 			</div>
 			<div class="footer">
 				<button id="login_boton_ingresar" type="submit" class="btn bg-blue btn-block tecla_enter jquery_button">Ingresar</button>
+				<button id="login_boton_ingresar_temp" onclick='window.location.replace("/proyecto_diplomado/app_js/menu/")' type="button" class="btn bg-blue btn-block tecla_enter jquery_button">INGRESO TEMP</button>
 			</div>
 		</div>
 	</div>
