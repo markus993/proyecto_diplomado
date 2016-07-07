@@ -1,0 +1,33 @@
+Uniajc\sgdepBundle\Entity\Concepto:
+    type: entity
+    table: concepto
+    indexes:
+        IDX_648388D0FCA5BA52:
+            columns:
+                - id_informacion
+    id:
+        idConcepto:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            column: id_concepto
+            generator:
+                strategy: SEQUENCE
+    fields:
+        concepto:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+    manyToOne:
+        idInformacion:
+            targetEntity: InformacionAsignatura
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_informacion:
+                    referencedColumnName: id_informacion
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

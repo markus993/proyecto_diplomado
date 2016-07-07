@@ -1,0 +1,58 @@
+'"primerSeguimiento"':
+    type: entity
+    table: '"Primer_seguimiento"'
+    indexes:
+        IDX_EFBB4D3080E812A6:
+            columns:
+                - id_asignacion
+    id:
+        idPSeguimiento:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            column: id_p_seguimiento
+            generator:
+                strategy: SEQUENCE
+    fields:
+        matriculados:
+            type: bigint
+            nullable: false
+            unsigned: false
+        perdieron:
+            type: string
+            nullable: false
+            length: 10
+            fixed: false
+        noPresentados:
+            type: string
+            nullable: false
+            length: 10
+            fixed: false
+            column: no_presentados
+        resultados:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        dificultades:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        acciones:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+    manyToOne:
+        idAsignacion:
+            targetEntity: Asignacion
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_asignacion:
+                    referencedColumnName: id_asignacion
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

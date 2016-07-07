@@ -1,0 +1,34 @@
+'"objetivoCurso"':
+    type: entity
+    table: '"Objetivo_curso"'
+    indexes:
+        IDX_A2BD5013FCA5BA52:
+            columns:
+                - id_informacion
+    id:
+        idObjetivoCurso:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            column: id_objetivo_curso
+            generator:
+                strategy: SEQUENCE
+    fields:
+        objetivoCurso:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            column: objetivo_curso
+    manyToOne:
+        idInformacion:
+            targetEntity: InformacionAsignatura
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_informacion:
+                    referencedColumnName: id_informacion
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

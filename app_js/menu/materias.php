@@ -1,4 +1,13 @@
+<?php 
+	if(isset($_GET["rol"])){
+		$rol = $_GET["rol"];
+	}
+	else{
+		echo 'ingreso no valido';
+		exit();
+	}
 
+?>
 <!DOCTYPE html>
 <html>
 	<?php include 'head.php';?>
@@ -35,7 +44,6 @@
 				<!-- Content Header (Page header) -->
 				<section class="content-header">
 					<h1>
-						<small>Lista de Materias</small>
 						Docente
 					</h1>
 					<ol class="breadcrumb">
@@ -44,8 +52,7 @@
 								<i class="fa fa-dashboard"></i>Home
 							</a>
 						</li>
-						<li class="active">Materia</li>
-						<li class="active">Sesion</li>
+						<li class="active">Materias</li>
 					</ol>
 				</section>
 
@@ -58,23 +65,22 @@
 								<table class="table table-striped">
 									<thead>
 										<tr>
-											<th>ID</th>
+											<th></th>
 											<th>Materia</th>
-											<th>Sede</th>
 											<th>Grupo</th>
-											<th>Estado</th>
+											<th>Sede</th>
+											<th>Codigo</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<td>1</td>
-											<td>Cali</td>
-											<td>805000889-0</td>
-											<td>Institución Universitaria Antonio José Camacho</td>
-											<td><input disabled="disabled" checked="checked" type="checkbox"></td>
 											<td>
-												<a class="btn btn-small btn-success" href="/proyecto_diplomado/app_js/menu/sesion.php?rol=vocero&materia=12">Ver</a>
+												<a class="btn btn-small btn-success" href="/proyecto_diplomado/app_js/menu/sesiones.php?rol=<?=$rol ?>&materia=12">></a>
 											</td>
+											<td>Calculo II</td>
+											<td>211</td>
+											<td>Norte</td>
+											<td>1190</td>
 										</tr>
 									</tbody>		
 								</table>

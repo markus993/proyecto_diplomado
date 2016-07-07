@@ -1,0 +1,37 @@
+'Uniajc\sgdepBundle\Entity\"contenidoUnidad"':
+    type: entity
+    table: '"Contenido_Unidad"'
+    indexes:
+        IDX_C740455FD5D165C2:
+            columns:
+                - id_unidad
+    id:
+        idContenido:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            column: id_contenido
+            generator:
+                strategy: SEQUENCE
+    fields:
+        contenido:
+            type: bigint
+            nullable: false
+            unsigned: false
+        descripcion:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+    manyToOne:
+        idUnidad:
+            targetEntity: UnidadTematica
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_unidad:
+                    referencedColumnName: id_unidad
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

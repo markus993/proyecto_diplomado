@@ -1,0 +1,33 @@
+'"habilidad"':
+    type: entity
+    table: '"Habilidad"'
+    indexes:
+        IDX_CFDBA85437C95619:
+            columns:
+                - id_asignatura
+    id:
+        idHabilidad:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            column: id_habilidad
+            generator:
+                strategy: SEQUENCE
+    fields:
+        habilidad:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+    manyToOne:
+        idAsignatura:
+            targetEntity: Asignatura
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_asignatura:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

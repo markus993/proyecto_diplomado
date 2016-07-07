@@ -1,0 +1,33 @@
+'"hallazgo"':
+    type: entity
+    table: '"Hallazgo"'
+    indexes:
+        IDX_BC22E844FCA5BA52:
+            columns:
+                - id_informacion
+    id:
+        idHallazgo:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            column: id_hallazgo
+            generator:
+                strategy: SEQUENCE
+    fields:
+        hallazgo:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+    manyToOne:
+        idInformacion:
+            targetEntity: InformacionAsignatura
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_informacion:
+                    referencedColumnName: id_informacion
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

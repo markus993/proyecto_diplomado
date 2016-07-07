@@ -1,0 +1,53 @@
+'"unidadTematica"':
+    type: entity
+    table: '"Unidad_tematica"'
+    indexes:
+        IDX_5D9677FCFCA5BA52:
+            columns:
+                - id_informacion
+    id:
+        idUnidad:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            column: id_unidad
+            generator:
+                strategy: SEQUENCE
+    fields:
+        nombre:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        semanas:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        td:
+            type: bigint
+            nullable: false
+            unsigned: false
+            column: TD
+        tid:
+            type: bigint
+            nullable: false
+            unsigned: false
+            column: TID
+        ti:
+            type: bigint
+            nullable: false
+            unsigned: false
+            column: TI
+    manyToOne:
+        idInformacion:
+            targetEntity: InformacionAsignatura
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_informacion:
+                    referencedColumnName: id_informacion
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

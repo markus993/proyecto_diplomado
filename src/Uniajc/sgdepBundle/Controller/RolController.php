@@ -20,13 +20,13 @@ class RolController extends Controller
 													estudiante.estado AS estudiante,
 													estudiante.vocero AS vocero
 											FROM
-													persona
-													LEFT JOIN director ON director.id_persona = persona.id AND director.id = persona.identificacion AND director.id_persona = persona.id AND director.id = persona.identificacion
-													LEFT JOIN docente ON docente.id_persona = persona.id AND docente.id = persona.identificacion AND docente.id_persona = persona.id AND docente.id = persona.identificacion
-													LEFT JOIN estudiante ON estudiante.id_persona = persona.id AND estudiante.id = persona.identificacion AND estudiante.id_persona = persona.id AND estudiante.id = persona.identificacion
-												WHERE 
-													persona.identificacion = :id
-												LIMIT 1");
+												persona
+												LEFT JOIN director ON director.id_persona = persona.id AND director.id = persona.identificacion AND director.id_persona = persona.id AND director.id = persona.identificacion
+												LEFT JOIN docente ON docente.id_persona = persona.id AND docente.id = persona.identificacion AND docente.id_persona = persona.id AND docente.id = persona.identificacion
+												LEFT JOIN estudiante ON estudiante.id_persona = persona.id AND estudiante.id = persona.identificacion AND estudiante.id_persona = persona.id AND estudiante.id = persona.identificacion
+											WHERE 
+												persona.identificacion = :id
+											LIMIT 1");
 		$statement->bindValue('id', $id);
 		$statement->execute();
 		$results = $statement->fetchAll();

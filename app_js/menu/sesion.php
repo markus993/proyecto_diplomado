@@ -1,4 +1,57 @@
+<?php 
+	if(isset($_GET["rol"])){
+		$rol = $_GET["rol"];
+	}
+	else{
+		echo 'ingreso no valido';
+		exit();
+	}
 
+	if(isset($_GET["materia"])){
+		$materia = $_GET["materia"];
+	}
+	else{
+		echo 'ingreso no valido';
+		exit();
+	}
+
+	$permisos = array(
+						'fecha' => 'disabled', 
+						'horas' => 'disabled', 
+						'temas' => 'disabled', 
+						'obs_doc' => 'disabled', 
+						'firm_doc' => 'disabled', 
+						'firm_voc' => 'disabled', 
+						'obs_fac' => 'disabled'
+					);
+	$display = array(
+						'temas' => 'display:none', 
+						'obs_doc' => 'display:none', 
+						'obs_fac' => 'display:none'
+					);
+
+	switch ($rol) {
+		case 'director':
+			$display['obs_fac']='';
+			$permisos['obs_fac']='';
+			break;
+
+		case 'docente':
+			$permisos['fecha']='';
+			$permisos['horas']='';
+			$permisos['temas']='';
+			$permisos['obs_doc']='';
+			$permisos['firm_doc']='';
+			$display['temas']='';
+			$display['obs_doc']='';
+			break;
+
+		case 'vocero':
+			$permisos['firm_voc']='';
+			break;
+	}
+
+?>
 <!DOCTYPE html>
 <html>
 	<?php include 'head.php';?>
@@ -35,8 +88,8 @@
 				<!-- Content Header (Page header) -->
 				<section class="content-header">
 					<h1>
-						<small>Materia</small>
-						Calculo II
+						Docente
+						<small>Materia Calculo II</small>
 					</h1>
 					<ol class="breadcrumb">
 						<li>
@@ -44,8 +97,9 @@
 								<i class="fa fa-dashboard"></i>Home
 							</a>
 						</li>
-						<li class="active">Materia</li>
-						<li class="active">Sesion</li>
+						<li class="active">Materias</li>
+						<li class="active">Lista de Semanas</li>
+						<li class="active">Semana</li>
 					</ol>
 				</section>
 
@@ -54,42 +108,48 @@
 					<div class="box box-info">						
 						<div class="box-body">
 							<h1>Semana 1</h1>
-								<form method="POST" action="http://181.48.204.173/homologaciones/public/asignaturas/1" accept-charset="UTF-8">
-									<input name="_rol" type="hidden" value="docente">
-									<input name="_token" type="hidden" value="VWduhQgBAcd1Puy0lN6PGjtQF09AfaCD4B4rVJrM">
+								<form method="POST" action="/homologaciones/public/asignaturas/1" accept-charset="UTF-8">
+									<input name="rol" id="rol" type="hidden" value="<?=$rol ?>">
 									<div class="form-group">
-										<label for="codigo">Fecha</label>
-										<input name="codigo" type="date" value="111" id="codigo">
+										<label for="fecha">Fecha</label>
+										<input name="fecha" type="date" value="2016-07-07" id="fecha" <?=$permisos['fecha'] ?> >
 									</div>
 									<div class="form-group">
-										<label for="nombre">Horas</label>
-										<input name="nombre_asignatura" type="number" value="Matematicas">
+										<label for="horas">Horas</label>
+										<input name="horas" type="number" value="3" <?=$permisos['horas'] ?>>
 									</div>
 									<div class="form-group">
-										<label for="intensidad_horaria">Temas</label>
-										<input name="intensidad_horaria" type="text" value="3" id="intensidad_horaria">
+										<label for="temas">Temas</label><br>
+										<a style="<?=$display['temas'] ?>" class="btn btn-small btn-success <?=$permisos['temas'] ?>" href="/proyecto_diplomado/app_js/menu/sesion.php?rol=vocero&materia=12">Seleccionar</a>
+										<ul class="sort-highlight margin">
+											<li>Tema I</li>
+											<li>Tema II</li>
+											<li>Tema III</li>
+										</ul>
 									</div>
 									<div class="form-group">
-										<label for="estado">Observaciones Docnete</label>
-										<input name="intensidad_horaria" type="text" value="3" id="intensidad_horaria">
+										<label for="estado">Observaciones Docente</label><br>
+										<a style="<?=$display['obs_doc'] ?>" class="btn btn-small btn-success margin <?=$permisos['obs_doc'] ?>" href="/proyecto_diplomado/app_js/menu/sesion.php?rol=vocero&materia=12">Editar</a>
+										<div class="sort-highlight pad">Observaciones realizadas por el docente</div>
 									</div>
 									<div class="form-group">
 										<label for="modalidad">Firma Docente</label>
-										<input name="estado" type="hidden" value="0" id="estado">
-										<input checked="checked" name="estado" type="checkbox" value="1" id="estado">
+										<input name="chk_firma_docente" type="hidden" value="0" id="chk_firma_docente">
+										<input checked="checked" name="firma_docente" type="checkbox" value="1" id="firma_docente" <?=$permisos['firm_doc'] ?>>
 									</div>
 									<div class="form-group">
 										<label for="estado">Firma Vocero</label>
-										<input name="estado" type="hidden" value="0" id="estado">
-										<input checked="checked" name="estado" type="checkbox" value="1" id="estado">
+										<input name="chk_firma_vocero" type="hidden" value="0" id="chk_firma_vocero">
+										<input checked="checked" name="firma_vocero" type="checkbox" value="1" id="firma_vocero" <?=$permisos['firm_voc'] ?>>
 									</div>
 									<div class="form-group">
-										<label for="estado">Observaciones Facultad</label>
-										<input name="intensidad_horaria" type="text" value="3" id="intensidad_horaria">
+										<label for="obs_facultad">Observaciones Facultad</label><br>
+										<a style="<?=$display['obs_fac'] ?>" class="btn btn-small btn-success margin <?=$permisos['obs_fac'] ?>" href="/proyecto_diplomado/app_js/menu/sesion.php?rol=vocero&materia=12">Editar</a>
+										<div class="sort-highlight pad">Observaciones realizadas por el director de programa</div>
 									</div>
 									<input name="uniajc" type="hidden" value="0">
 									<input class="btn btn-primary" type="submit" value="Guardar">
-									<a href="/proyecto_diplomado/app_js/menu/materias.php?rol=docente" class="btn btn-default">
+									<a href="/proyecto_diplomado/app_js/menu/sesiones.php?rol=<?=$rol ?>&materia=<?=$materia ?>" class="btn btn-default">
 										Volver
 									</a>
 								</form>

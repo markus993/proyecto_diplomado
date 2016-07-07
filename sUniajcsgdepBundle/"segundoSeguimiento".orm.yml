@@ -1,0 +1,64 @@
+'"segundoSeguimiento"':
+    type: entity
+    table: '"Segundo_seguimiento"'
+    indexes:
+        IDX_E5084A5A80E812A6:
+            columns:
+                - id_asignacion
+    id:
+        idSSeguimiento:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            column: id_s_seguimiento
+            generator:
+                strategy: SEQUENCE
+    fields:
+        matriculados:
+            type: bigint
+            nullable: false
+            unsigned: false
+        perdieronMateria:
+            type: bigint
+            nullable: false
+            unsigned: false
+            column: perdieron_materia
+        cancelaron:
+            type: bigint
+            nullable: false
+            unsigned: false
+        resultadosAcciones:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            column: resultados_acciones
+        aspectosInconclusos:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            column: aspectos_inconclusos
+        registroEstrategias:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            column: registro_estrategias
+        recomendaciones:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+    manyToOne:
+        idAsignacion:
+            targetEntity: Asignacion
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_asignacion:
+                    referencedColumnName: id_asignacion
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

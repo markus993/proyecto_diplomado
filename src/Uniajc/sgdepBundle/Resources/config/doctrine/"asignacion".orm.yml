@@ -1,0 +1,67 @@
+'Uniajc\sgdepBundle\Entity\"asignacion"':
+    type: entity
+    table: '"Asignacion"'
+    indexes:
+        IDX_6A3F91A1FCA5BA52:
+            columns:
+                - id_informacion
+        IDX_6A3F91A19EB5BF7A:
+            columns:
+                - id_estudiante
+        IDX_6A3F91A1230266D4:
+            columns:
+                - id_docente
+    id:
+        idAsignacion:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            column: id_asignacion
+            generator:
+                strategy: SEQUENCE
+    fields:
+        salon:
+            type: string
+            nullable: false
+            length: 30
+            fixed: false
+        grupo:
+            type: string
+            nullable: false
+            length: 30
+            fixed: false
+        periodo:
+            type: string
+            nullable: false
+            length: 30
+            fixed: false
+    manyToOne:
+        idInformacion:
+            targetEntity: InformacionAsignatura
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_informacion:
+                    referencedColumnName: id_informacion
+            orphanRemoval: false
+        idEstudiante:
+            targetEntity: Estudiante
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_estudiante:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idDocente:
+            targetEntity: Docente
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_docente:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

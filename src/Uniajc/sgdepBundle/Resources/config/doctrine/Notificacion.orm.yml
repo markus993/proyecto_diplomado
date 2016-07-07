@@ -1,0 +1,38 @@
+Uniajc\sgdepBundle\Entity\Notificacion:
+    type: entity
+    table: notificacion
+    indexes:
+        IDX_729A19EC71C5326D:
+            columns:
+                - id_ejecucion
+    id:
+        id:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+    fields:
+        cuerpoCorreo:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            column: cuerpo_correo
+        destinatarios:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+    manyToOne:
+        idEjecucion:
+            targetEntity: EjecucionPlan
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_ejecucion:
+                    referencedColumnName: id_ejecucion
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,30 @@
+Uniajc\sgdepBundle\Entity\Estudiante:
+    type: entity
+    table: estudiante
+    indexes:
+        IDX_3B3F3FAD8F781FEBBF396750:
+            columns:
+                - id_persona
+                - id
+    id: {  }
+    fields:
+        estado:
+            type: smallint
+            nullable: false
+            unsigned: false
+        vocero:
+            type: boolean
+            nullable: false
+    manyToOne:
+        idPersona:
+            targetEntity: Persona
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_persona:
+                    referencedColumnName: id
+                id:
+                    referencedColumnName: identificacion
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

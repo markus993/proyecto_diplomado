@@ -1,0 +1,33 @@
+'Uniajc\sgdepBundle\Entity\"conocimiento"':
+    type: entity
+    table: '"Conocimiento"'
+    indexes:
+        IDX_B1D3DD137C95619:
+            columns:
+                - id_asignatura
+    id:
+        idConocimiento:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            column: id_conocimiento
+            generator:
+                strategy: SEQUENCE
+    fields:
+        conocimiento:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+    manyToOne:
+        idAsignatura:
+            targetEntity: Asignatura
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_asignatura:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

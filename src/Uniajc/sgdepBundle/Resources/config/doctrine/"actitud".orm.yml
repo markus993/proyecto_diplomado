@@ -1,0 +1,33 @@
+'Uniajc\sgdepBundle\Entity\"actitud"':
+    type: entity
+    table: '"Actitud"'
+    indexes:
+        IDX_F063CABF37C95619:
+            columns:
+                - id_asignatura
+    id:
+        idActitud:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            column: id_actitud
+            generator:
+                strategy: SEQUENCE
+    fields:
+        actitud:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+    manyToOne:
+        idAsignatura:
+            targetEntity: Asignatura
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_asignatura:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

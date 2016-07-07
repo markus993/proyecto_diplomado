@@ -1,0 +1,101 @@
+'Uniajc\sgdepBundle\Entity\"acuerdo"':
+    type: entity
+    table: '"Acuerdo"'
+    indexes:
+        IDX_4753DA9D80E812A6:
+            columns:
+                - id_asignacion
+        IDX_4753DA9D52BF95CD:
+            columns:
+                - id_objetivo_curso
+        IDX_4753DA9D73471A8B:
+            columns:
+                - id_aspecto_evaluacion
+        IDX_4753DA9D60C00C45:
+            columns:
+                - id_aspecto_metodologico
+    id:
+        idAcuerdo:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            column: id_acuerdo
+            generator:
+                strategy: SEQUENCE
+    fields:
+        cambios:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        numeroEstudiantes:
+            type: string
+            nullable: false
+            length: 10
+            fixed: false
+            column: numero_estudiantes
+        nombreVocero:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            column: nombre_vocero
+        telefonoVocero:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            column: telefono_vocero
+        correoVocero:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            column: correo_vocero
+        ciudad:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        fecha:
+            type: date
+            nullable: false
+    manyToOne:
+        idAsignacion:
+            targetEntity: Asignacion
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_asignacion:
+                    referencedColumnName: id_asignacion
+            orphanRemoval: false
+        idObjetivoCurso:
+            targetEntity: ObjetivoCurso
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_objetivo_curso:
+                    referencedColumnName: id_objetivo_curso
+            orphanRemoval: false
+        idAspectoEvaluacion:
+            targetEntity: AspectoEvaluacion
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_aspecto_evaluacion:
+                    referencedColumnName: id_aspecto_evaluacion
+            orphanRemoval: false
+        idAspectoMetodologico:
+            targetEntity: AspectoMetodologico
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_aspecto_metodologico:
+                    referencedColumnName: id_aspecto_metodologico
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

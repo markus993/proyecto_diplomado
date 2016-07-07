@@ -1,0 +1,75 @@
+Uniajc\sgdepBundle\Entity\EjecucionPlan:
+    type: entity
+    table: ejecucion_plan
+    indexes:
+        IDX_27D909AA80E812A6:
+            columns:
+                - id_asignacion
+        IDX_27D909AAA5DFB84A:
+            columns:
+                - id_facultad
+        IDX_27D909AA567A477F:
+            columns:
+                - id_plan
+    id:
+        idEjecucion:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            column: id_ejecucion
+            generator:
+                strategy: SEQUENCE
+    fields:
+        fecha:
+            type: date
+            nullable: false
+        checkboxDocente:
+            type: boolean
+            nullable: false
+            column: checkbox_docente
+        checkboxEstudiante:
+            type: boolean
+            nullable: false
+            column: checkbox_estudiante
+        observacionDocente:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            column: observacion_docente
+        observacionFacultad:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            column: observacion_Facultad
+    manyToOne:
+        idAsignacion:
+            targetEntity: Asignacion
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_asignacion:
+                    referencedColumnName: id_asignacion
+            orphanRemoval: false
+        idFacultad:
+            targetEntity: Facultad
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_facultad:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idPlan:
+            targetEntity: PlanCurso
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_plan:
+                    referencedColumnName: id_plan
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

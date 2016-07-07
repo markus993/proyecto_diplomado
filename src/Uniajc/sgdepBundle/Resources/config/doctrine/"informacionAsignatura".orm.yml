@@ -1,0 +1,84 @@
+'Uniajc\sgdepBundle\Entity\"informacionAsignatura"':
+    type: entity
+    table: '"Informacion_asignatura"'
+    indexes:
+        IDX_C6B7BA5137C95619:
+            columns:
+                - id_asignatura
+        IDX_C6B7BA51522BF898:
+            columns:
+                - id_programa
+        IDX_C6B7BA515CB4216A:
+            columns:
+                - id_area
+    id:
+        idInformacion:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            column: id_informacion
+            generator:
+                strategy: SEQUENCE
+    fields:
+        semestre:
+            type: string
+            nullable: false
+            length: 100
+            fixed: false
+        justificacion:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+        objetoEstudio:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            column: objeto_estudio
+        objetivoFormacion:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            column: objetivo_formacion
+        td:
+            type: bigint
+            nullable: false
+            unsigned: false
+            column: TD
+        ti:
+            type: bigint
+            nullable: false
+            unsigned: false
+            column: TI
+    manyToOne:
+        idAsignatura:
+            targetEntity: Asignatura
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_asignatura:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idPrograma:
+            targetEntity: Programa
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_programa:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idArea:
+            targetEntity: AreaFormacion
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_area:
+                    referencedColumnName: id_area
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

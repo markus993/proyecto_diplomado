@@ -6,60 +6,43 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * PlanCurso
- *
- * @ORM\Table(name="plan_curso", indexes={@ORM\Index(name="IDX_999D051080E812A6", columns={"id_asignacion"})})
- * @ORM\Entity
  */
 class PlanCurso
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id_plan", type="bigint", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="plan_curso_id_plan_seq", allocationSize=1, initialValue=1)
      */
     private $idPlan;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="sesion", type="integer", nullable=false)
      */
     private $sesion;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="trabajo_dirigido", type="string", length=255, nullable=false)
      */
     private $trabajoDirigido;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="trabajo_independiente_dirigido", type="string", length=255, nullable=false)
      */
     private $trabajoIndependienteDirigido;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="trabajo_independiente", type="string", length=255, nullable=false)
      */
     private $trabajoIndependiente;
 
     /**
-     * @var \Asignacion
-     *
-     * @ORM\ManyToOne(targetEntity="Asignacion")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_asignacion", referencedColumnName="id_asignacion")
-     * })
+     * @var \DateTime
+     */
+    private $fechaSesion;
+
+    /**
+     * @var \Uniajc\sgdepBundle\Entity\Asignacion
      */
     private $idAsignacion;
-
 
 
     /**
@@ -162,6 +145,29 @@ class PlanCurso
     public function getTrabajoIndependiente()
     {
         return $this->trabajoIndependiente;
+    }
+
+    /**
+     * Set fechaSesion
+     *
+     * @param \DateTime $fechaSesion
+     * @return PlanCurso
+     */
+    public function setFechaSesion($fechaSesion)
+    {
+        $this->fechaSesion = $fechaSesion;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaSesion
+     *
+     * @return \DateTime 
+     */
+    public function getFechaSesion()
+    {
+        return $this->fechaSesion;
     }
 
     /**

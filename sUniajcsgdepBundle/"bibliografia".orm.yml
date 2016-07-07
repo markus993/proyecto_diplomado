@@ -1,0 +1,33 @@
+'"bibliografia"':
+    type: entity
+    table: '"Bibliografia"'
+    indexes:
+        IDX_86A24C4537C95619:
+            columns:
+                - id_asignatura
+    id:
+        idBibliografia:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            column: id_bibliografia
+            generator:
+                strategy: SEQUENCE
+    fields:
+        bibliografia:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+    manyToOne:
+        idAsignatura:
+            targetEntity: Asignatura
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_asignatura:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

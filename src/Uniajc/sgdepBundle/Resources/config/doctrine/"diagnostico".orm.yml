@@ -1,0 +1,63 @@
+'Uniajc\sgdepBundle\Entity\"diagnostico"':
+    type: entity
+    table: '"Diagnostico"'
+    indexes:
+        IDX_1D0D5B9F158F6687:
+            columns:
+                - id_hallazgo
+        IDX_1D0D5B9F80E812A6:
+            columns:
+                - id_asignacion
+        IDX_1D0D5B9FAC355659:
+            columns:
+                - id_accion
+        IDX_1D0D5B9F34586445:
+            columns:
+                - id_concepto
+    id:
+        idDiagnostico:
+            type: bigint
+            nullable: false
+            unsigned: false
+            id: true
+            column: id_diagnostico
+            generator:
+                strategy: SEQUENCE
+    manyToOne:
+        idHallazgo:
+            targetEntity: Hallazgo
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_hallazgo:
+                    referencedColumnName: id_hallazgo
+            orphanRemoval: false
+        idAsignacion:
+            targetEntity: Asignacion
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_asignacion:
+                    referencedColumnName: id_asignacion
+            orphanRemoval: false
+        idAccion:
+            targetEntity: Accion
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_accion:
+                    referencedColumnName: id_accion
+            orphanRemoval: false
+        idConcepto:
+            targetEntity: Concepto
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_concepto:
+                    referencedColumnName: id_concepto
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

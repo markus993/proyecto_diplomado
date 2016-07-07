@@ -1,0 +1,27 @@
+Director:
+    type: entity
+    table: director
+    indexes:
+        IDX_1E90D3F08F781FEBBF396750:
+            columns:
+                - id_persona
+                - id
+    id: {  }
+    fields:
+        estado:
+            type: smallint
+            nullable: false
+            unsigned: false
+    manyToOne:
+        idPersona:
+            targetEntity: Persona
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_persona:
+                    referencedColumnName: id
+                id:
+                    referencedColumnName: identificacion
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
