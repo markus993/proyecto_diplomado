@@ -5,15 +5,15 @@
         IDX_1D0D5B9F158F6687:
             columns:
                 - id_hallazgo
-        IDX_1D0D5B9F80E812A6:
-            columns:
-                - id_asignacion
         IDX_1D0D5B9FAC355659:
             columns:
                 - id_accion
         IDX_1D0D5B9F34586445:
             columns:
                 - id_concepto
+        IDX_1D0D5B9F80E812A6:
+            columns:
+                - id_asignacion
     id:
         idDiagnostico:
             type: bigint
@@ -33,15 +33,6 @@
                 id_hallazgo:
                     referencedColumnName: id_hallazgo
             orphanRemoval: false
-        idAsignacion:
-            targetEntity: Asignacion
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                id_asignacion:
-                    referencedColumnName: id_asignacion
-            orphanRemoval: false
         idAccion:
             targetEntity: Accion
             cascade: {  }
@@ -59,5 +50,14 @@
             joinColumns:
                 id_concepto:
                     referencedColumnName: id_concepto
+            orphanRemoval: false
+        idAsignacion:
+            targetEntity: Asignacion
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_asignacion:
+                    referencedColumnName: id_asignacion
             orphanRemoval: false
     lifecycleCallbacks: {  }

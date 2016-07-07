@@ -2,15 +2,15 @@
     type: entity
     table: '"Informacion_asignatura"'
     indexes:
+        IDX_C6B7BA515CB4216A:
+            columns:
+                - id_area
         IDX_C6B7BA5137C95619:
             columns:
                 - id_asignatura
         IDX_C6B7BA51522BF898:
             columns:
                 - id_programa
-        IDX_C6B7BA515CB4216A:
-            columns:
-                - id_area
     id:
         idInformacion:
             type: bigint
@@ -54,6 +54,15 @@
             unsigned: false
             column: TI
     manyToOne:
+        idArea:
+            targetEntity: AreaFormacion
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_area:
+                    referencedColumnName: id_area
+            orphanRemoval: false
         idAsignatura:
             targetEntity: Asignatura
             cascade: {  }
@@ -71,14 +80,5 @@
             joinColumns:
                 id_programa:
                     referencedColumnName: id
-            orphanRemoval: false
-        idArea:
-            targetEntity: AreaFormacion
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                id_area:
-                    referencedColumnName: id_area
             orphanRemoval: false
     lifecycleCallbacks: {  }

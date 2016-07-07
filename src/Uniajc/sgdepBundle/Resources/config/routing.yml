@@ -7,3 +7,9 @@ uniajcsgdep_consulta:
 uniajcsgdep_rol:
     path:     /rol/{id}
     defaults: { _controller: UniajcsgdepBundle:Rol:show }
+uniajcsgdep_asignacion_consulta_docente:
+    path:     /asignacion/{rol}/{id_docente}/{id_asignatura}/{sesion}
+    defaults: { _controller: UniajcsgdepBundle:Asignacion:show }
+uniajcsgdep_asignacion_guarda_vocero:
+    path:     /asignacion/vocero/{id_asignacion}/{id_ejecucion}/{id_facultad}/{id_plan}/{checked}
+    defaults: { _controller: UniajcsgdepBundle:Asignacion:saveVocero }

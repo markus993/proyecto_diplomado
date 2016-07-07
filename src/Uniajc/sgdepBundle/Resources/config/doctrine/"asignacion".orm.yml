@@ -5,12 +5,12 @@
         IDX_6A3F91A1FCA5BA52:
             columns:
                 - id_informacion
-        IDX_6A3F91A19EB5BF7A:
-            columns:
-                - id_estudiante
         IDX_6A3F91A1230266D4:
             columns:
                 - id_docente
+        IDX_6A3F91A19EB5BF7A:
+            columns:
+                - id_estudiante
     id:
         idAsignacion:
             type: bigint
@@ -46,15 +46,6 @@
                 id_informacion:
                     referencedColumnName: id_informacion
             orphanRemoval: false
-        idEstudiante:
-            targetEntity: Estudiante
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                id_estudiante:
-                    referencedColumnName: id
-            orphanRemoval: false
         idDocente:
             targetEntity: Docente
             cascade: {  }
@@ -62,6 +53,15 @@
             inversedBy: null
             joinColumns:
                 id_docente:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idEstudiante:
+            targetEntity: Estudiante
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_estudiante:
                     referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }

@@ -6,7 +6,20 @@
 		echo 'ingreso no valido';
 		exit();
 	}
+	
+	switch ($rol) {
+		case 'director':
+			$label='Director';
+			break;
 
+		case 'docente':
+			$label='Docente';
+			break;
+
+		case 'vocero':
+			$label='Vocero';
+			break;
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,7 +57,7 @@
 				<!-- Content Header (Page header) -->
 				<section class="content-header">
 					<h1>
-						Docente
+						<?=$label ?>
 					</h1>
 					<ol class="breadcrumb">
 						<li>
@@ -75,7 +88,7 @@
 									<tbody>
 										<tr>
 											<td>
-												<a class="btn btn-small btn-success" href="/proyecto_diplomado/app_js/menu/sesiones.php?rol=<?=$rol ?>&materia=12">></a>
+												<a class="btn btn-small btn-success" href="/proyecto_diplomado/app_js/menu/sesiones.php?rol=<?=$rol ?>&materia=1">></a>
 											</td>
 											<td>Calculo II</td>
 											<td>211</td>

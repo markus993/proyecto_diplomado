@@ -5,15 +5,15 @@
         IDX_4753DA9D80E812A6:
             columns:
                 - id_asignacion
-        IDX_4753DA9D52BF95CD:
-            columns:
-                - id_objetivo_curso
         IDX_4753DA9D73471A8B:
             columns:
                 - id_aspecto_evaluacion
         IDX_4753DA9D60C00C45:
             columns:
                 - id_aspecto_metodologico
+        IDX_4753DA9D52BF95CD:
+            columns:
+                - id_objetivo_curso
     id:
         idAcuerdo:
             type: bigint
@@ -71,15 +71,6 @@
                 id_asignacion:
                     referencedColumnName: id_asignacion
             orphanRemoval: false
-        idObjetivoCurso:
-            targetEntity: ObjetivoCurso
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                id_objetivo_curso:
-                    referencedColumnName: id_objetivo_curso
-            orphanRemoval: false
         idAspectoEvaluacion:
             targetEntity: AspectoEvaluacion
             cascade: {  }
@@ -97,5 +88,14 @@
             joinColumns:
                 id_aspecto_metodologico:
                     referencedColumnName: id_aspecto_metodologico
+            orphanRemoval: false
+        idObjetivoCurso:
+            targetEntity: ObjetivoCurso
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_objetivo_curso:
+                    referencedColumnName: id_objetivo_curso
             orphanRemoval: false
     lifecycleCallbacks: {  }
