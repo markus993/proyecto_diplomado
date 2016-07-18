@@ -32,37 +32,34 @@ function iniciarSesion() {
 			mostrarCargando();
 		
 			//Aqui va el api call para verificar el usuario y contraseña
-			$.get("/proyecto_diplomado/web/app_dev.php/rol/"+loginUsuario.val(), function (datos) {
-
-				/*if(datos!=false){
-					$.each(datos.usuarios, function (id, dato) {
-						if (loginUsuario.val() == dato.usuario &&
-							CryptoJS.SHA3(loginContrasena.val()).toString(CryptoJS.enc.Base64) == CryptoJS.SHA3(dato.contrasena).toString(CryptoJS.enc.Base64)) {
-							loginEstado     = true;
-							sesion.usuario  = loginUsuario.val();
-							sesion.nombre   = dato.nombre;
-							sesion.perfil   = dato.perfil;
-							sesion.token    = tokenAleatorio();
+			
+			$.post(
+				"/proyecto_diplomado/web/app_dev.php/auth",
+				{ 
+					id: loginUsuario.val(),
+					pass: CryptoJS.SHA3(loginContrasena.val()).toString() 
+				},
+				 function (datos) {
+					$.post( 
+						"menu/session.php", 
+  						{ 
+  							session: 'start', 
+  							identificacion: loginUsuario.val(), 
+  							roles: datos
+  						},
+						function(data) {
+							console.log(data);
+							if(data == 'true'){
+							  window.location = 'menu/';
+							}else{
+								ocultarCargando();
+								loginContrasena.notify(
+									"Usuario o contraseña incorrecta",
+									{ className: "error", position: "right" }
+								);
+							}
 						}
-					});
-					loginEstado     = true;
-				}
-				
-				if (loginEstado === true) {
-					guardarLocalStorage('datAlphaSesion', JSON.stringify(sesion));
-					window.location = 'main.html';
-				} else {
-					$('#mensaje').html('<div>Rol response: '+datos+'</div>');
-					ocultarCargando();
-					$('#login_boton_ingresar').notify(
-						"El usuario o la contraseña son invalidos",
-						{ className: "error", position: "right" }
 					);
-				}*/
-				
-				ocultarCargando();
-
-				$('#mensaje').html('<div>Rol : '+datos+'</div>');
 			});        
 		}
 	});

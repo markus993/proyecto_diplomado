@@ -16,3 +16,5 @@
 <script src="js/icheck.min.js"></script>
 <!-- AdminLTE App -->
 <script src="js/app.js"></script>
+<script src="js/consultas.js"></script>
+<script src="js/menu.js"></script>

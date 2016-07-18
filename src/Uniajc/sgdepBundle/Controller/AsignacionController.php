@@ -8,14 +8,13 @@ use Uniajc\sgdepBundle\Entity\EjecucionPlan;
 
 class AsignacionController extends Controller
 {
-	public function showAction($id_docente, $id_asignatura, $sesion )
+	public function showAction($id_asignatura, $sesion )
 	{
 		$em = $this->getDoctrine()->getEntityManager();
 		$connection = $em->getConnection();
 		$statement = $connection->prepare('SELECT
 												plan_curso.fecha_sesion as fecha_planeada,
 												persona.identificacion as identificacion,
-												"Unidad_tematica".nombre as tematica,
 												"ejecucion_plan".checkbox_docente,
 												"ejecucion_plan".checkbox_estudiante,
 												"ejecucion_plan".fecha,
@@ -35,13 +34,10 @@ class AsignacionController extends Controller
 											INNER JOIN persona ON docente.id_persona = persona."id" AND docente."id" = persona.identificacion AND docente.id_persona = persona."id" AND docente."id" = persona.identificacion
 											INNER JOIN "Unidad_tematica" ON "Unidad_tematica".id_informacion = "Informacion_asignatura".id_informacion AND "Unidad_tematica".id_informacion = "Informacion_asignatura".id_informacion
 											WHERE 
-												docente.id = :id_docente
-											AND
 												asignatura.id  = :id_asignatura
 											AND
 												plan_curso.sesion  = :sesion
 											LIMIT 1');
-		$statement->bindValue('id_docente', $id_docente);
 		$statement->bindValue('id_asignatura', $id_asignatura);
 		$statement->bindValue('sesion', $sesion);
 		$statement->execute();
@@ -53,7 +49,6 @@ class AsignacionController extends Controller
 			
 			$response['fecha_planeada'] = $results[0]['fecha_planeada'];
 			$response['identificacion'] = $results[0]['identificacion'];
-			$response['tematica'] = $results[0]['tematica'];
 
 			$response['fecha'] = $results[0]['fecha'];
 			$response['checkbox_docente'] = $results[0]['checkbox_docente'].'';

@@ -1,4 +1,16 @@
 <?php 
+	session_start();
+	if (isset($_SESSION['session']) ) {
+		if ( $_SESSION['session'] != 'true' ) {
+		    print_r ($_SESSION['session']);
+		    print_r ('No hay Sesion abierta');
+		    exit();
+		}
+	}else{
+	    print_r ('No hay Sesion abierta');
+	    exit();
+	}
+	
 	if(isset($_GET["rol"])){
 		$rol = $_GET["rol"];
 	}
@@ -41,21 +53,27 @@
 				<section class="sidebar">
 					<!-- sidebar menu: : style can be found in sidebar.less -->
 					<ul class="sidebar-menu">
+						<?php if($_SESSION['director']=='true'){ ?>
 						<li onclick="console.log('Director')">
 							<a href="/proyecto_diplomado/app_js/menu/materias.php?rol=director">
 								<i class="fa fa-dashboard"></i> <span>Director</span>
 							</a>
 						</li>
+						<?php }
+						if($_SESSION['docente']=='true'){ ?>
 						<li onclick="console.log('Docente')">
 							<a href="/proyecto_diplomado/app_js/menu/materias.php?rol=docente">
 								<i class="fa fa-dashboard"></i> <span>Docente</span>
 							</a>
 						</li>
+						<?php }
+						if($_SESSION['vocero']=='true'){ ?>
 						<li onclick="console.log('Vocero')">
 							<a href="/proyecto_diplomado/app_js/menu/materias.php?rol=vocero">
 								<i class="fa fa-dashboard"></i> <span>Vocero</span>
 							</a>
 						</li>
+						<?php } ?>
 					</ul>
 				</section>
 				<!-- /.sidebar -->
@@ -90,13 +108,7 @@
 											<th>Numero de Semana</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td>
-												<a class="btn btn-small btn-success" href="/proyecto_diplomado/app_js/menu/sesion.php?rol=<?=$rol ?>&materia=<?=$materia ?>&sesion=1">></a>
-											</td>
-											<td>Semana I</td>
-										</tr>
+									<tbody id="tbody">
 									</tbody>		
 								</table>
 								<div class="centrado"></div>
@@ -109,3 +121,6 @@
 		<?php include 'footer.php';?>
 	</body>
 </html>
+<script type="text/javascript">
+	load_sesiones('<?=$rol ?>','<?=$materia ?>');
+</script>

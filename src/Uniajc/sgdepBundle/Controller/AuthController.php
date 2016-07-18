@@ -6,19 +6,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Uniajc\sgdepBundle\Entity\Persona;
 use Symfony\Component\HttpFoundation\Response;
 
-class RolController extends Controller
+class AuthController extends Controller
 {
-    public function showAction($id)
+	 
+    public function showAction()
     {
+
 		$em = $this->getDoctrine()->getEntityManager();
 		$connection = $em->getConnection();
 		$statement = $connection->prepare("SELECT
-													persona.nombres,
-													persona.apellidos,
-													director.estado AS director,
-													docente.estado AS docente,
-													estudiante.estado AS estudiante,
-													estudiante.vocero AS vocero
+												persona.nombres,
+												persona.apellidos,
+												director.estado AS director,
+												docente.estado AS docente,
+												estudiante.estado AS estudiante,
+												estudiante.vocero AS vocero
 											FROM
 												persona
 												LEFT JOIN director ON director.id_persona = persona.id AND director.id = persona.identificacion AND director.id_persona = persona.id AND director.id = persona.identificacion
@@ -26,8 +28,12 @@ class RolController extends Controller
 												LEFT JOIN estudiante ON estudiante.id_persona = persona.id AND estudiante.id = persona.identificacion AND estudiante.id_persona = persona.id AND estudiante.id = persona.identificacion
 											WHERE 
 												persona.identificacion = :id
+											AND
+												persona.direccion = :pass
 											LIMIT 1");
-		$statement->bindValue('id', $id);
+		$statement->bindValue('id', $this->get('request')->request->get('id'));
+		$statement->bindValue('pass', $this->get('request')->request->get('pass'));
+		
 		$statement->execute();
 		$results = $statement->fetchAll();
 		if( count($results) ==0){

@@ -1,4 +1,16 @@
 <?php 
+	session_start();
+	if (isset($_SESSION['session']) ) {
+		if ( $_SESSION['session'] != 'true' ) {
+		    print_r ($_SESSION['session']);
+		    print_r ('No hay Sesion abierta');
+		    exit();
+		}
+	}else{
+	    print_r ('No hay Sesion abierta');
+	    exit();
+	}
+
 	if(isset($_GET["rol"])){
 		$rol = $_GET["rol"];
 	}else{
@@ -20,7 +32,7 @@
 		exit();
 	}
 
-	$identificacion = 946868686;
+	$identificacion = $_SESSION['identificacion'];
 
 	$permisos = array(
 						'fecha' => 'disabled', 
@@ -63,7 +75,8 @@
 			$label='Vocero';
 			break;
 	}
-	$url = "http://186.146.248.97:8585/proyecto_diplomado/web/app_dev.php/asignacion/$rol/$identificacion/$materia/$sesion";
+
+	$url = "http://186.146.248.97:8585/proyecto_diplomado/web/app_dev.php/asignacion/$materia/$sesion";
 	
 	$vars = file_get_contents($url);
 	$vars = json_decode($vars,true);
@@ -73,16 +86,12 @@
 	$observacion_Facultad = $vars ['observacion_Facultad'];
 	$fecha_planeada = $vars ['fecha_planeada'];
 	$identificacion = $vars ['identificacion'];
-	$tematica = $vars ['tematica'];
 	$fecha = $vars ['fecha'];
-
 
 	$id_asignacion = $vars ['id_asignacion'];
 	$id_ejecucion = $vars ['id_ejecucion'];
 	$id_facultad = $vars ['id_facultad'];
 	$id_plan = $vars ['id_plan'];
-
-
 
 	if($vars ['checkbox_docente'] == '1'){
 		$checkbox_docente = 'checked';
@@ -108,21 +117,27 @@
 				<section class="sidebar">
 					<!-- sidebar menu: : style can be found in sidebar.less -->
 					<ul class="sidebar-menu">
+						<?php if($_SESSION['director']=='true'){ ?>
 						<li onclick="console.log('Director')">
 							<a href="/proyecto_diplomado/app_js/menu/materias.php?rol=director">
 								<i class="fa fa-dashboard"></i> <span>Director</span>
 							</a>
 						</li>
+						<?php }
+						if($_SESSION['docente']=='true'){ ?>
 						<li onclick="console.log('Docente')">
 							<a href="/proyecto_diplomado/app_js/menu/materias.php?rol=docente">
 								<i class="fa fa-dashboard"></i> <span>Docente</span>
 							</a>
 						</li>
+						<?php }
+						if($_SESSION['vocero']=='true'){ ?>
 						<li onclick="console.log('Vocero')">
 							<a href="/proyecto_diplomado/app_js/menu/materias.php?rol=vocero">
 								<i class="fa fa-dashboard"></i> <span>Vocero</span>
 							</a>
 						</li>
+						<?php } ?>
 					</ul>
 				</section>
 				<!-- /.sidebar -->
@@ -165,8 +180,7 @@
 									<div class="form-group">
 										<label for="temas">Temas</label><br>
 										<a onclick="return no_implementado()" style="<?=$display['temas'] ?>" class="btn btn-small btn-success <?=$permisos['temas'] ?>" href="/proyecto_diplomado/app_js/menu/sesion.php?rol=vocero&materia=12">Seleccionar</a>
-										<ul class="sort-highlight margin">
-											<li><?=$tematica ?></li>
+										<ul id="tematica" class="sort-highlight margin">
 										</ul>
 									</div>
 									<div class="form-group">
@@ -203,27 +217,13 @@
 </html>
 <script type="text/javascript">
 
-	function no_implementado(){
-		alert('funcion no implementada');
-		return false;
-	}
-
 	$( "#sesion" ).submit(function( event ) {
 		<?=$funcion ?>();
 		event.preventDefault();
 	});
 
-	function guarda_vocero(){
-		firma_vocero = $('#firma_vocero').prop('checked');
-		if(firma_vocero)
-			firma_vocero = 't';
-		else
-			firma_vocero = 'f';
-		url = '<?= "http://186.146.248.97:8585/proyecto_diplomado/web/app_dev.php/asignacion/vocero/$id_asignacion/$id_ejecucion/$id_facultad/$id_plan/" ?>'+firma_vocero;
-		$.get(url, function(data, status){
-			alert("Save: " + data + "\nStatus: " + status);
-		});
-		return false;
-	}
+	$(document).ready(function () {
+		 load_temas(<?=$materia ?>,<?=$sesion ?>);
+	});
 
 </script>

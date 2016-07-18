@@ -1,15 +1,25 @@
-uniajcsgdep_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: UniajcsgdepBundle:Default:index }
 uniajcsgdep_consulta:
     path:     /consulta/{tabla}/{campo}/{id}
     defaults: { _controller: UniajcsgdepBundle:Consulta:show }
-uniajcsgdep_rol:
-    path:     /rol/{id}
-    defaults: { _controller: UniajcsgdepBundle:Rol:show }
+uniajcsgdep_auth:
+    path:     /auth
+    defaults: { _controller: UniajcsgdepBundle:Auth:show }
+    methods:  [POST]
 uniajcsgdep_asignacion_consulta_docente:
-    path:     /asignacion/{rol}/{id_docente}/{id_asignatura}/{sesion}
+    path:     /asignacion/{id_asignatura}/{sesion}
     defaults: { _controller: UniajcsgdepBundle:Asignacion:show }
 uniajcsgdep_asignacion_guarda_vocero:
     path:     /asignacion/vocero/{id_asignacion}/{id_ejecucion}/{id_facultad}/{id_plan}/{checked}
     defaults: { _controller: UniajcsgdepBundle:Asignacion:saveVocero }
+uniajcsgdep_materias_docente:
+    path:     /materias/docente/{id_docente}
+    defaults: { _controller: UniajcsgdepBundle:Materias:loadDocente }
+uniajcsgdep_materias_sesiones:
+    path:     /materias/sesiones/{materia}
+    defaults: { _controller: UniajcsgdepBundle:Materias:loadSesiones }
+uniajcsgdep_materias_temas:
+    path:     /materias/temas/{materia}/{sesion}
+    defaults: { _controller: UniajcsgdepBundle:Materias:loadTemas }
+uniajcsgdep_materias_temas:
+    path:     /materias/temas/{materia}/all
+    defaults: { _controller: UniajcsgdepBundle:Materias:loadAllTemas }
