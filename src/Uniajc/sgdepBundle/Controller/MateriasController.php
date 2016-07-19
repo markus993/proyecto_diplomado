@@ -58,7 +58,8 @@ class MateriasController extends Controller
 												INNER JOIN "public".docente ON "public"."Asignacion".id_docente = "public".docente."id"
 												INNER JOIN "public".persona ON "public".docente.id_persona = "public".persona."id" AND "public".docente."id" = "public".persona.identificacion
 											WHERE
-												"public".plan_curso.sesion = "public"."Unidad_tematica".semanas AND
+												"public".plan_curso.sesion = "public"."Unidad_tematica".semanas 
+											AND
 												"public".asignatura."id" =  :materia');
 		$statement->bindValue('materia', $materia);
 		$statement->execute();

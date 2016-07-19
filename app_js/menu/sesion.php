@@ -166,7 +166,7 @@
 				<section class="content">
 					<div class="box box-info">						
 						<div class="box-body">
-							<h1>Semana 1</h1>
+							<h1>Semana <?= $sesion ?></h1>
 								<form method="POST" action="" id="sesion" accept-charset="UTF-8">
 									<input name="rol" id="rol" type="hidden" value="<?=$rol ?>">
 									<div class="form-group">
@@ -179,7 +179,7 @@
 									</div>
 									<div class="form-group">
 										<label for="temas">Temas</label><br>
-										<a onclick="return no_implementado()" style="<?=$display['temas'] ?>" class="btn btn-small btn-success <?=$permisos['temas'] ?>" href="/proyecto_diplomado/app_js/menu/sesion.php?rol=vocero&materia=12">Seleccionar</a>
+										<a style="<?=$display['temas'] ?>" class="btn btn-small btn-success <?=$permisos['temas'] ?>" href="/proyecto_diplomado/app_js/menu/temas.php?rol=<?=$rol ?>&materia=<?=$materia ?>&sesion=<?=$sesion ?>">Seleccionar</a>
 										<ul id="tematica" class="sort-highlight margin">
 										</ul>
 									</div>

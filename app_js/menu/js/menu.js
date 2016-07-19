@@ -26,6 +26,50 @@
 		);
 	}
 
+	function load_temas_editor(materia,sesion){
+		$.get(
+			"/proyecto_diplomado/web/app_dev.php/materias/temas/"+materia+'/all',
+			function (datos) {
+				$("#tbody").html('');
+				$.each(datos, function(i, val) {
+				console.log(val);  
+				out = '<tr><td><input type="checkbox" name="chk_group[]" value="'+val['id_unidad']+'"></td><td>'+val['tema']+'</td><td></tr>';
+				$("#tbody").append(out);
+				});
+			}
+		);
+	}
+
+	function save_temas_editor(materia,sesion){
+
+		var values = [];
+		$(':checkbox:checked').each(function(i){
+			values[i] = $(this).val();
+		});
+		console.log(values);
+		$.post( 
+			"menu/session.php", 
+				{ 
+					session: 'start', 
+					materia: materia,
+					sesion: sesion,
+					temas: values
+				},
+			function(data) {
+				console.log(data);
+				if(data == 'true'){
+				  window.location = 'menu/';
+				}else{
+					ocultarCargando();
+					loginContrasena.notify(
+						"Usuario o contraseña incorrecta",
+						{ className: "error", position: "right" }
+					);
+				}
+			}
+		);
+	}
+
 	function load_sesiones(rol,materia){
 		$.get(
 			"/proyecto_diplomado/web/app_dev.php/materias/sesiones/"+materia,

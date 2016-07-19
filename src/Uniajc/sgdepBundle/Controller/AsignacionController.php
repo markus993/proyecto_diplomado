@@ -26,17 +26,19 @@ class AsignacionController extends Controller
 												"ejecucion_plan"."id_plan"
 											FROM
 												asignatura
-											INNER JOIN "Informacion_asignatura" ON "Informacion_asignatura".id_asignatura = asignatura."id" AND "Informacion_asignatura".id_asignatura = asignatura."id"
+											INNER JOIN "Informacion_asignatura" ON "Informacion_asignatura".id_asignatura = asignatura."id"
 											INNER JOIN "Asignacion" ON "Asignacion".id_informacion = "Informacion_asignatura".id_informacion
 											INNER JOIN "ejecucion_plan" ON "ejecucion_plan".id_asignacion = asignatura."id" 
-											INNER JOIN plan_curso ON plan_curso.id_asignacion = "Asignacion".id_asignacion AND plan_curso.id_asignacion = "Asignacion".id_asignacion
+											INNER JOIN plan_curso ON plan_curso.id_asignacion = "Asignacion".id_asignacion
 											INNER JOIN docente ON "Asignacion".id_docente = docente."id"
-											INNER JOIN persona ON docente.id_persona = persona."id" AND docente."id" = persona.identificacion AND docente.id_persona = persona."id" AND docente."id" = persona.identificacion
-											INNER JOIN "Unidad_tematica" ON "Unidad_tematica".id_informacion = "Informacion_asignatura".id_informacion AND "Unidad_tematica".id_informacion = "Informacion_asignatura".id_informacion
+											INNER JOIN persona ON docente.id_persona = persona."id" AND docente."id" = persona.identificacion
+											INNER JOIN "Unidad_tematica" ON "Unidad_tematica".id_informacion = "Informacion_asignatura".id_informacion 
 											WHERE 
-												asignatura.id  = :id_asignatura
+												"Asignacion".id_asignacion  = :id_asignatura
 											AND
 												plan_curso.sesion  = :sesion
+											AND 
+												"public"."Unidad_tematica".semanas = "public".plan_curso.sesion
 											LIMIT 1');
 		$statement->bindValue('id_asignatura', $id_asignatura);
 		$statement->bindValue('sesion', $sesion);
