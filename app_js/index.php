@@ -43,6 +43,23 @@
 				<div class="footer">
 					<button id="login_boton_ingresar" type="submit" class="btn bg-blue btn-block tecla_enter jquery_button">Ingresar</button>
 				</div>
+				<div class="footer">
+					1151942263;"Brayner";"Peñafiel"
+					946868686;"Marco";"Mayor"
+					1144567432;"William";"Diaz"
+					123458764;"Lina";"Perez"
+					16537128;"Alexander";"Cordoba"
+					25705805;"Maria";"Burbano"
+					1113545243;"Joanna Maria";"Martinez"
+					1144567434;"Jairo Antonio";"Meza"
+					1144239766;"Andres";"Arteaga"
+					97123654;"Carmen Amelia";"Restrepo"
+					164445552;"Roberto Jose";"Caballero"
+					1130529410;"Ana Maria";"Soto"
+					1130123456;"Jairo";"Castañeda"
+					1130554344;"Liliana";"Martinez"
+					1144567233;"Julio";"Casas"
+				</div>
 			</div>
 		</div>
 	</body>

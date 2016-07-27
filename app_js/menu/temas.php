@@ -118,7 +118,7 @@
 									<tbody id="tbody">
 									</tbody>		
 								</table>
-								<input id="save_boton_temas" class="btn btn-primary" type="submit" value="Guardar">
+								<input onclick="return no_implementado()" id="save_boton_temas" class="btn btn-primary" type="submit" value="Guardar">
 								<a href="/proyecto_diplomado/app_js/menu/sesion.php?rol=<?=$rol ?>&materia=<?=$materia ?>&sesion=<?=$sesion ?>" class="btn btn-default">
 									Volver
 								</a>

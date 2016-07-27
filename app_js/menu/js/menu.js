@@ -18,7 +18,7 @@
 			function (datos) {
 				  $("#tematica").html('');
 				$.each(datos, function(i, val) {
-				console.log(val);  
+				//console.log(val);  
 				out = '<li>'+val['tema']+'</li>';
 				 $("#tematica").append(out);
 				});
@@ -28,7 +28,7 @@
 
 	function load_temas_editor(materia,sesion){
 		$.get(
-			"/proyecto_diplomado/web/app_dev.php/materias/temas/"+materia+'/all',
+			"/proyecto_diplomado/web/app_dev.php/materias/temas_all/"+materia,
 			function (datos) {
 				$("#tbody").html('');
 				$.each(datos, function(i, val) {
@@ -76,8 +76,8 @@
 			function (datos) {
 				  $("#tbody").html('');
 				$.each(datos, function(i, val) {
-				console.log(val);  
-				out = '<tr><td><a class="btn btn-small btn-success" href="/proyecto_diplomado/app_js/menu/sesion.php?materia='+val['id_asignatura']+'&sesion='+val['sesion']+'&rol='+rol+'">></a></td><td>Semana '+val['sesion']+'</td></tr>';
+				//console.log(val);  
+				out = '<tr><td><a class="btn btn-small btn-success" href="/proyecto_diplomado/app_js/menu/sesion.php?materia='+materia+'&sesion='+val['sesion']+'&rol='+rol+'">></a></td><td>Semana '+val['sesion']+'</td></tr>';
 				 $("#tbody").append(out);
 				});
 			}
@@ -91,13 +91,38 @@
 
 	function guarda_vocero(){
 		firma_vocero = $('#firma_vocero').prop('checked');
+		id_ejecucion = $('#id_ejecucion').val();
 		if(firma_vocero)
 			firma_vocero = 't';
 		else
 			firma_vocero = 'f';
-		url = '<?= "http://186.146.248.97:8585/proyecto_diplomado/web/app_dev.php/asignacion/vocero/$id_asignacion/$id_ejecucion/$id_facultad/$id_plan/" ?>'+firma_vocero;
+		url = '/proyecto_diplomado/web/app_dev.php/asignacion/vocero/'+id_ejecucion+'/'+firma_vocero;
 		$.get(url, function(data, status){
-			alert("Save: " + data + "\nStatus: " + status);
+			if(status == 'success' && data == 'true')
+				alert('Guardado correctamente');
+			else
+				alert('Hubo un error al guardar');
+		});
+		return false;
+	}
+
+	function guarda_docente(){
+		firma_docente = $('#firma_docente').prop('checked');
+		fecha = $('#fecha').val();
+		horas = $('#horas').val();
+		json_tematica = $('#json_tematica').val();
+		observacion_docente = $('#observacion_docente').val();
+		
+		if(firma_docente)
+			firma_docente = 't';
+		else
+			firma_docente = 'f';
+		url = '/proyecto_diplomado/web/app_dev.php/asignacion/vocero/'+id_ejecucion+'/'+firma_vocero;
+		$.get(url, function(data, status){
+			if(status == 'success' && data == 'true')
+				alert('Guardado correctamente');
+			else
+				alert('Hubo un error al guardar');
 		});
 		return false;
 	}

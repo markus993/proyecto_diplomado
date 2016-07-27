@@ -8,11 +8,63 @@ use Uniajc\sgdepBundle\Entity\EjecucionPlan;
 
 class MateriasController extends Controller
 {
-	public function loadDocenteAction($id_docente )
+	public function loadMailDocentesAction()
 	{
 		$em = $this->getDoctrine()->getEntityManager();
 		$connection = $em->getConnection();
 		$statement = $connection->prepare('SELECT
+											"public"."ejecucion_plan".id_ejecucion,
+											"public"."persona".email AS mail_docente,
+											"public"."asignatura".nombre AS materia,
+											"public".ejecucion_plan.fecha AS fecha_vencida,
+											"public".plan_curso.sesion AS sesion_vencida
+											FROM
+											"ejecucion_plan"
+											INNER JOIN "public"."Asignacion" ON "public"."Asignacion".id_informacion = "public"."ejecucion_plan".id_asignacion 
+											INNER JOIN "public"."persona" ON "public"."Asignacion".id_docente = "public"."persona".identificacion
+											INNER JOIN "public".plan_curso ON "public".plan_curso.id_asignacion = "public"."ejecucion_plan".id_asignacion 
+											INNER JOIN "public"."Informacion_asignatura" ON "public"."Asignacion".id_informacion = "public"."Informacion_asignatura".id_informacion
+											INNER JOIN "public".asignatura ON "public"."Informacion_asignatura".id_asignatura = "public".asignatura."id"
+											LEFT JOIN "public".notificacion ON "public"."ejecucion_plan".id_ejecucion = "public".notificacion.id_ejecucion
+											WHERE 
+											ejecucion_plan.fecha < now() 
+											AND
+											"public".notificacion."id" IS NULL');
+		$statement->execute();
+		$results = $statement->fetchAll();
+		//echo '<pre>'; var_dump($statement);echo '</pre>';
+		if( count($results) ==0){
+			return $this->render('UniajcsgdepBundle:Default:asignacion.html.twig', array('response' => 'false'));
+		}else{
+			$response = $results;
+
+			if(isset($response)){
+				foreach ($response as $key => $value) {
+					$sql = 'INSERT INTO 
+							"public".notificacion 
+							(id_ejecucion, cuerpo_correo, destinatarios) 
+							VALUES
+							(:id_ejecucion, :cuerpo, :mail)';
+					$statement = $connection->prepare($sql);
+					$statement->bindValue('id_ejecucion', $value['id_ejecucion']);
+					$statement->bindValue('cuerpo', 'Text');
+					$statement->bindValue('mail', $value['mail_docente']);
+					//$rows = $statement->execute();
+				}
+				$response = new Response(json_encode($response));
+				$response->headers->set('Content-Type', 'application/json');
+
+				return $response;
+			}else
+				return $this->render('UniajcsgdepBundle:Default:asignacion.html.twig', array('response' => 'false'));
+		}
+	}
+
+	public function loadDocenteAction($id_docente )
+	{
+		$em = $this->getDoctrine()->getEntityManager();
+		$connection = $em->getConnection();
+		$statement = $connection->prepare('SELECT DISTINCT
 											"public".asignatura."id" AS id_asignatura,
 											"public".asignatura.nombre AS nombre,
 											"public"."Asignacion".periodo AS periodo
@@ -41,26 +93,54 @@ class MateriasController extends Controller
 		}
 	}
 
+	public function loadVoceroAction($id_vocero )
+	{
+		$em = $this->getDoctrine()->getEntityManager();
+		$connection = $em->getConnection();
+		$statement = $connection->prepare('SELECT DISTINCT
+											"public".asignatura."id" AS id_asignatura,
+											"public".asignatura.nombre AS nombre,
+											"public"."Asignacion".periodo AS periodo
+											FROM
+											"public"."Informacion_asignatura"
+											INNER JOIN "public".asignatura ON "public"."Informacion_asignatura".id_asignatura = "public".asignatura."id"
+											INNER JOIN "public"."Asignacion" ON "public"."Asignacion".id_informacion = "public"."Informacion_asignatura".id_informacion
+											INNER JOIN "public".estudiante ON "public"."Asignacion".id_estudiante = "public".estudiante."id"
+											INNER JOIN "public".persona ON "public".estudiante.id_persona = "public".persona."id" AND "public".estudiante."id" = "public".persona.identificacion
+											WHERE "public".persona."identificacion" =  :id_vocero');
+		$statement->bindValue('id_vocero', $id_vocero);
+		$statement->execute();
+		$results = $statement->fetchAll();
+		//echo '<pre>'; var_dump($statement);echo '</pre>';
+		if( count($results) ==0){
+			return $this->render('UniajcsgdepBundle:Default:asignacion.html.twig', array('response' => 'false'));
+		}else{
+			$response = $results;
+
+			if(isset($response)){
+				$response = new Response(json_encode($response));
+				$response->headers->set('Content-Type', 'application/json');
+				return $response;
+			}else
+				return $this->render('UniajcsgdepBundle:Default:asignacion.html.twig', array('response' => 'false'));
+		}
+	}
+
 	public function loadSesionesAction($materia )
 	{
 		$em = $this->getDoctrine()->getEntityManager();
 		$connection = $em->getConnection();
 		$statement = $connection->prepare('SELECT
-												"public".plan_curso.sesion,
-												"public".plan_curso.id_asignacion,
-												"public"."Informacion_asignatura".id_asignatura
+												"public".plan_curso.sesion
 											FROM
 												"public".asignatura
-												INNER JOIN "public"."Informacion_asignatura" ON "public"."Informacion_asignatura".id_asignatura = "public".asignatura."id"
-												INNER JOIN "public"."Asignacion" ON "public"."Asignacion".id_informacion = "public"."Informacion_asignatura".id_informacion
-												INNER JOIN "public".plan_curso ON "public".plan_curso.id_asignacion = "public"."Asignacion".id_asignacion
-												INNER JOIN "public"."Unidad_tematica" ON "public"."Unidad_tematica".id_informacion = "public"."Informacion_asignatura".id_informacion
-												INNER JOIN "public".docente ON "public"."Asignacion".id_docente = "public".docente."id"
-												INNER JOIN "public".persona ON "public".docente.id_persona = "public".persona."id" AND "public".docente."id" = "public".persona.identificacion
+											INNER JOIN "public"."Informacion_asignatura" ON "public"."Informacion_asignatura".id_asignatura = "public".asignatura."id"
+											INNER JOIN "public"."Asignacion" ON "public"."Asignacion".id_informacion = "public"."Informacion_asignatura".id_informacion
+											INNER JOIN "public".plan_curso ON "public".plan_curso.id_asignacion = "public"."Asignacion".id_asignacion
+											INNER JOIN "public"."Unidad_tematica" ON "public"."Unidad_tematica".id_informacion = "public"."Informacion_asignatura".id_informacion
 											WHERE
-												"public".plan_curso.sesion = "public"."Unidad_tematica".semanas 
-											AND
-												"public".asignatura."id" =  :materia');
+												"public".plan_curso.sesion = "public"."Unidad_tematica".semanas AND
+												"public".asignatura."id" = :materia');
 		$statement->bindValue('materia', $materia);
 		$statement->execute();
 		$results = $statement->fetchAll();
@@ -155,20 +235,14 @@ class MateriasController extends Controller
 		$em = $this->getDoctrine()->getEntityManager();
 		$connection = $em->getConnection();
 		$statement = $connection->prepare('SELECT
-												"public"."Unidad_tematica".id_unidad,
-												"public"."Unidad_tematica".nombre as tema
+											"public"."Unidad_tematica".id_unidad,
+											"public"."Unidad_tematica".nombre AS tema
 											FROM
-												"public".asignatura
-												INNER JOIN "public"."Informacion_asignatura" ON "public"."Informacion_asignatura".id_asignatura = "public".asignatura."id"
-												INNER JOIN "public"."Unidad_tematica" ON "public"."Unidad_tematica".id_informacion = "public"."Informacion_asignatura".id_informacion
-												INNER JOIN "public"."Asignacion" ON "public"."Asignacion".id_informacion = "public"."Informacion_asignatura".id_informacion
-												INNER JOIN "public".plan_curso ON "public".plan_curso.id_asignacion = "public"."Asignacion".id_asignacion
-												INNER JOIN "public".docente ON "public"."Asignacion".id_docente = "public".docente."id"
-												INNER JOIN "public".persona ON "public".docente.id_persona = "public".persona."id" AND "public".docente."id" = "public".persona.identificacion
-												INNER JOIN "public".programa ON "public"."Informacion_asignatura".id_programa = "public".programa."id"
-												INNER JOIN "public".facultad ON "public".programa.id_facultad = "public".facultad."id"
+											"public".asignatura
+											INNER JOIN "public"."Informacion_asignatura" ON "public"."Informacion_asignatura".id_asignatura = "public".asignatura."id"
+											INNER JOIN "public"."Unidad_tematica" ON "public"."Unidad_tematica".id_informacion = "public"."Informacion_asignatura".id_informacion
 											WHERE
-												"public".asignatura."id" = :materia');
+											"public".asignatura."id" = :materia');
 		$statement->bindValue('materia', $materia);
 		$statement->execute();
 		$results = $statement->fetchAll();
