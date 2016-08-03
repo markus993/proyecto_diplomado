@@ -1,4 +1,4 @@
 services:
-#    uniajcsgdep.example:
-#        class: Uniajc\sgdepBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    uniajcsgdep.database:
+        class: Uniajc\sgdepBundle\Model
+        arguments: ["@doctrine.orm.entity_manager"]

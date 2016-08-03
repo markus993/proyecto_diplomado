@@ -5,7 +5,7 @@
 				  $("#tbody").html('');
 				$.each(datos, function(i, val) {
 				console.log(val);  
-				out = '<tr><td><a class="btn btn-small btn-success" href="/proyecto_diplomado/app_js/menu/sesiones.php?rol='+rol+'&materia='+val['id_asignatura']+'">></a></td><td>'+val['nombre']+'</td><td>'+val['periodo']+'</td><td>-</td><td>-</td></tr>';
+				out = '<tr><td><a class="btn btn-small btn-success" href="/proyecto_diplomado/app_js/menu/sesiones.php?rol='+rol+'&materia='+val['id_asignatura']+'">></a></td><td><a target="blank" class="btn btn-small btn-success" href="/proyecto_diplomado/app_js/pdf/informe.php?var='+val['id_asignatura']+'">PDF</a></td><td>'+val['nombre']+'</td><td>'+val['periodo']+'</td><td>-</td><td>-</td></tr>';
 				  $("#tbody").append(out);
 				});
 			}

@@ -73,7 +73,7 @@
 			break;
 	}
 
-	$url = "http://186.146.248.97:8585/proyecto_diplomado/web/app_dev.php/asignacion/$materia/$sesion";
+	$url = "http://186.146.248.97:8585/proyecto_diplomado/web/app_dev.php/asignacion/$materia/$sesion/$rol";
 	
 	$vars = file_get_contents($url);
 	$vars = json_decode($vars,true);
@@ -178,7 +178,7 @@
 					<div class="box box-info">						
 						<div class="box-body">
 							<h1>Semana <?= $sesion ?></h1>
-							<?php if($vars['estado'] == 'creado'){ ?>
+							<?php if($vars['estado'] == 'encontrado'){ ?>
 								<form method="POST" action="" id="sesion" accept-charset="UTF-8">
 									<input name="rol" id="rol" type="hidden" value="<?=$rol ?>">
 									<input name="id_ejecucion" id="id_ejecucion" type="hidden" value="<?=$id_ejecucion ?>">

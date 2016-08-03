@@ -5,12 +5,17 @@ uniajcsgdep_auth:
     path:     /auth
     defaults: { _controller: UniajcsgdepBundle:Auth:show }
     methods:  [POST]
+    
 uniajcsgdep_asignacion_consulta_docente:
-    path:     /asignacion/{id_asignatura}/{sesion}
+    path:     /asignacion/{id_asignatura}/{sesion}/{rol}
     defaults: { _controller: UniajcsgdepBundle:Asignacion:show }
 uniajcsgdep_asignacion_guarda_vocero:
     path:     /asignacion/vocero/{id_ejecucion}/{checked}
     defaults: { _controller: UniajcsgdepBundle:Asignacion:saveVocero }
+uniajcsgdep_materias_sesiones_reporte:
+    path:     /materias/sesiones/reporte/{materia}
+    defaults: { _controller: UniajcsgdepBundle:Asignacion:loadSesionesReporte }
+
 uniajcsgdep_materias_docente:
     path:     /materias/docente/{id_docente}
     defaults: { _controller: UniajcsgdepBundle:Materias:loadDocente }
@@ -26,9 +31,6 @@ uniajcsgdep_materias_temas:
 uniajcsgdep_materias_temas_all:
     path:     /materias/temas_all/{materia}
     defaults: { _controller: UniajcsgdepBundle:Materias:loadAllTemas }
-uniajcsgdep_materias_sesiones_reporte:
-    path:     /materias/sesiones/reporte/{materia}
-    defaults: { _controller: UniajcsgdepBundle:Asignacion:loadSesionesReporte }
 uniajcsgdep_materias_sesiones_mail:
     path:     /materias/sesiones/mail/
     defaults: { _controller: UniajcsgdepBundle:Materias:loadMailDocentes }
