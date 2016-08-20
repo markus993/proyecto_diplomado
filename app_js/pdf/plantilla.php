@@ -1,9 +1,11 @@
 <?php
 	if (!isset($_GET["var"]))
 		$var = 1;
+	else
+		$var = $_GET["var"];
 	$jason = file_get_contents("http://186.146.248.97:8585/proyecto_diplomado/web/app_dev.php/materias/sesiones/reporte/".$var);
 	$producto = json_decode(utf8_decode($jason));
-	echo '<pre>';var_dump($producto);echo '</pre>';
+	//echo '<pre>';var_dump($producto);echo '</pre>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,12 +32,12 @@
 			<table>
 				<thead>
 					<tr>
-						<th class="desc">VBO ESTUDIANTE</th>
+						<th>FECHA SESION</th>
+						<th>TEMAS SESION</th>
 						<th>OBSERVACION DOCENTE</th>
 						<th>OBSERVACION FACULTAD</th>
-						<th>FACULTAD</th>
-						<th>FECHA SESION</th>
-						<th>IDENTIFICACION DOCENTE</th>
+						<th>FIRMADO DOCENTE</th>
+						<th>FIRMADO ESTUDIANTE</th>
 						<th>INTENSIDAD HORARIA</th>
 					</tr>
 					<?php
@@ -43,23 +45,20 @@
 					$acum = '';
 					foreach ($producto as $obj) {
 						$asignatura = $obj->asignatura;
-						$id_ejecucion = $obj->id_ejecucion;
 						$checkbox_docente = ($obj->checkbox_docente = 't') ? 'Firmado' : '-' ;
 						$checkbox_estudiante = ($obj->checkbox_estudiante = 't') ? $obj->estudiante : '-' ;
 						$observacion_Facultad = $obj->observacion_Facultad;
 						$facultad = $obj->facultad;
 						$fecha_sesion = $obj->fecha_sesion;
-						$identificacion_docente = $obj->identificacion_docente;
 						$intensidad_horaria = $obj->intensidad_horaria;
 						$variable_cont = '
 						<tr>
+						<td class="total">' . $fecha_sesion . '</td>
+						<td class="total">' . 'TEMAS' . '</td>
+						<td class="qty">' . $observacion_Facultad . '</td>
+						<td class="total">' . $intensidad_horaria . '</td>
 						<td class="unit">' . $checkbox_docente . '</td>
 						<td class="qty">' . $checkbox_estudiante . '</td>
-						<td class="qty">' . $observacion_Facultad . '</td>
-						<td class="total">' . $facultad . '</td>
-						<td class="total">' . $fecha_sesion . '</td>
-						<td class="total">' . $identificacion_docente . '</td>
-						<td class="total">' . $intensidad_horaria . '</td>
 						</tr>';
 						$acum = '' . $acum . '' . $variable_cont;
 					}

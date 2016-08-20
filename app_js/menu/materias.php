@@ -96,11 +96,9 @@
 								<table class="table table-striped">
 									<thead>
 										<tr>
+											<th>Ingresar</th>
 											<th></th>
 											<th>Materia</th>
-											<th>Grupo</th>
-											<th>Sede</th>
-											<th>Codigo</th>
 										</tr>
 									</thead>
 									<tbody id="tbody">

@@ -31,7 +31,7 @@
 						</li>
 						<li class="user-footer">
 							<div class="pull-right">
-								<a href="#" class="btn btn-default btn-flat">Cerrar sesion</a>
+								<a href="/proyecto_diplomado/app_js/?session=close" class="btn btn-default btn-flat">Cerrar sesion</a>
 							</div>
 						</li>
 					</ul>

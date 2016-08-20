@@ -1,0 +1,43 @@
+<?php
+        class  JonathanReport_Test extends PHPUnit_Framework_TestCase{
+
+                public function test_reports_jonathan(){
+                        echo ' >>>>>>>>>> Jonathan Unit Test <<<<<<<<<<';
+                        $url = 'http://186.146.248.97:8585/proyecto_diplomado/web/app_dev.php/materias/sesiones/reporte/2';
+
+                        $content=file_get_contents($url);
+
+                        $json = json_decode($content);
+
+                        //Afirma que una cadena es una cadena JSON válida
+                        $this->assertJson($content,'El JSON recibido es incorrecto!');
+
+                        foreach($json as $obj){
+                                $docente = $obj->docente;
+                                $estudiante = $obj->estudiante;
+                                $asignatura = $obj->asignatura;
+                                $checkbox_docente= $obj->checkbox_docente;
+                                $checkbox_estudiante = $obj->checkbox_estudiante;
+                                $observacion_docente = $obj->observacion_docente;
+                                $observacion_Facultad = $obj->observacion_Facultad;
+                                $facultad = $obj->facultad;
+                                $fecha_sesion = $obj->fecha_sesion;
+                                $intensidad_horaria = $obj->intensidad_horaria;
+
+
+                                // Afirma que una variable no está vacía
+                                $this->assertNotEmpty($docente,'No se encuentra el docente en el JSON');
+                                $this->assertNotEmpty($estudiante,'No se encuentra el estudiante  en el JSON');
+                                $this->assertNotEmpty($asignatura,'No se encuentra la asignatura en el JSON');
+                                $this->assertNotEmpty($observacion_docente,'No se encuentra la observación del docente en el JSON');
+                                $this->assertNotEmpty($facultad,'No se encuentra la facultad en el JSON');
+                                $this->assertNotEmpty($fecha_sesion,'No se encuentra la fecha de la sesion en el JSON');
+                                $this->assertNotEmpty($intensidad_horaria,'No se encuentra la intensidad horaria en el JSON');
+                                // verifica que el docente
+                                //$this->assertRegExp('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/', $docente, 'El docente en el JSON no es valido!');
+                        }
+                }
+        }
+
+
+

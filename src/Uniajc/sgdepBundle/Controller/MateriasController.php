@@ -14,7 +14,7 @@ class MateriasController extends Controller
 		if(!isset($this->database))
 			$this->database = new Model($this->getDoctrine()->getEntityManager());
 		return $this->database;
-	}   
+	}
 	public function loadMailDocentesAction()
 	{
 		$this->getAccessDatabase();
@@ -28,8 +28,7 @@ class MateriasController extends Controller
 
 			if(isset($response)){
 				foreach ($response as $key => $value) {
-					$ejecucion_plan = $this->database->getObject($value['id_ejecucion'],'EjecucionPlan');
-					$results = $this->database->insertNotificacionBD($ejecucion_plan,$value['mail_docente'],'Text');
+					$results = $this->database->insertNotificacionBD($value['id_ejecucion'],$value['mail_docente'],'Text');
 				}
 				$response = new Response(json_encode($response));
 				$response->headers->set('Content-Type', 'application/json');
@@ -44,6 +43,25 @@ class MateriasController extends Controller
 	{
 		$this->getAccessDatabase();
 		$results = $this->database->loadDocenteBD($id_docente);
+		//echo '<pre>'; var_dump($statement);echo '</pre>';
+		if( count($results) ==0){
+			return $this->render('UniajcsgdepBundle:Default:asignacion.html.twig', array('response' => 'false'));
+		}else{
+			$response = $results;
+
+			if(isset($response)){
+				$response = new Response(json_encode($response));
+				$response->headers->set('Content-Type', 'application/json');
+				return $response;
+			}else
+				return $this->render('UniajcsgdepBundle:Default:asignacion.html.twig', array('response' => 'false'));
+		}
+	}
+
+	public function loadDirectorAction($id_director )
+	{
+		$this->getAccessDatabase();
+		$results = $this->database->loadDirectorBD($id_director);
 		//echo '<pre>'; var_dump($statement);echo '</pre>';
 		if( count($results) ==0){
 			return $this->render('UniajcsgdepBundle:Default:asignacion.html.twig', array('response' => 'false'));
@@ -135,7 +153,6 @@ class MateriasController extends Controller
 
 	public function loadAllTemasAction($materia)
 	{
-		
 		$this->getAccessDatabase();
 		$results = $this->database->loadAllTemasBD($materia);
 		//echo '<pre>'; var_dump($statement);echo '</pre>';

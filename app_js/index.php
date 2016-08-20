@@ -1,3 +1,12 @@
+<?php 
+	
+	session_start();
+	if(isset($_GET['session']))
+		if($_GET['session'] = 'close'){
+			$_SESSION['session'] = 'close';
+			session_destroy();
+		}
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es" class="bg-black">
 	<head>
